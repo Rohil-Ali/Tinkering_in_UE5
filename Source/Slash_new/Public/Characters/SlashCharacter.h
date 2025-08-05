@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -11,6 +9,7 @@ class AItems;
 class USpringArmComponent;
 class UCameraComponent;
 class UGroomComponent;
+class UAnimMontage;
 
 UCLASS()
 class SLASH_NEW_API ASlashCharacter : public ACharacter
@@ -24,14 +23,25 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	/*
+	 Callbacks for inputs
+	*/
 	void MoveForward(float Value);
 	void LookUp(float Value);
 	void Turn(float Value);
 	void MoveRight(float Value);
 	void EKeyPressed();
+	void AttackPressed();
+
+	/*
+	* Play montage functions
+	*/
+	void PlayAttackMontage(); //plays the attack montage when the attack button is pressed.
 
 private:
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped; //character default state.
+	UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess= "true"))
+	EActionState ActionState = EActionState::EAS_Unoccupied;
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USpringArmComponent> SpringArm;
 	UPROPERTY(VisibleAnywhere)
@@ -44,6 +54,13 @@ private:
 	//stores the item that the character is currently overlapping with and is set in the item class.
 	UPROPERTY(VisibleInstanceOnly)
 	TObjectPtr<AItems> OverlappingItem;
+
+	/*
+	 Animation Montage variables
+	*/
+
+	UPROPERTY(EditAnywhere, Category = "Montages")
+	UAnimMontage* AttackMontage; //attack montage to be played when the attack button is pressed.
 
 public:
 	//getters and setter should be sperated like this for good practice.

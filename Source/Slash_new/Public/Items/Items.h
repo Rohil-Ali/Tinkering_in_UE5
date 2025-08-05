@@ -6,6 +6,12 @@
 #include "GameFramework/Actor.h"
 #include "Items.generated.h"
 
+enum class EItemState : uint8
+{
+	EIS_Hovering,
+	EIS_Equipped
+};
+
 class USphereComponent;
 UCLASS()
 class SLASH_NEW_API AItems : public AActor
@@ -33,6 +39,8 @@ protected:
 
 	UFUNCTION()
 	virtual void EndSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	EItemState ItemState = EItemState::EIS_Hovering;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> ItemMesh;

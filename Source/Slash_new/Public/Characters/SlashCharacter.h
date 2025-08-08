@@ -10,6 +10,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class UGroomComponent;
 class UAnimMontage;
+class AWepaon;
 
 UCLASS()
 class SLASH_NEW_API ASlashCharacter : public ACharacter
@@ -37,7 +38,7 @@ protected:
 	* Play montage functions
 	*/
 	void PlayAttackMontage(); //plays the attack montage when the attack button is pressed.
-
+	void PlayEquipMontage(FName SectionName); //plays the equip montage when the character equips an item.
 private:
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped; //character default state.
 	UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess= "true"))
@@ -55,6 +56,9 @@ private:
 	UPROPERTY(VisibleInstanceOnly)
 	TObjectPtr<AItems> OverlappingItem;
 
+	UPROPERTY(VisibleAnywhere, Category = "Weapon")
+	AWepaon* EquippedWeapon; //the weapon that the character has equipped.
+
 	/*
 	 Animation Montage variables
 	*/
@@ -64,6 +68,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Montages")
 	UAnimMontage* EquipMontage;
+
 
 public:
 	//getters and setter should be sperated like this for good practice.

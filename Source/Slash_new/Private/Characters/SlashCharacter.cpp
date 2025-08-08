@@ -81,6 +81,14 @@ void ASlashCharacter::EKeyPressed()
 		OverlappingWeapon->Equip(GetMesh(), FName("RightHandSocket"));
 		CharacterState = ECharacterState::ECS_EquippedOneHandedWeapon;
 	}
+	else
+	{
+		if (ActionState == EActionState::EAS_Unoccupied && CharacterState != ECharacterState::ECS_Unequipped && EquipMontage)
+		{
+
+			CharacterState = ECharacterState::ECS_Unequipped;
+		}
+	}
 }
 
 void ASlashCharacter::AttackPressed()
@@ -108,6 +116,8 @@ void ASlashCharacter::PlayAttackMontage()
 			break;
 		case 1:
 			SectionName = FName("Attack2");
+			break;
+		default:
 			break;
 		}
 		AnimInstance->Montage_JumpToSection(SectionName, AttackMontage);

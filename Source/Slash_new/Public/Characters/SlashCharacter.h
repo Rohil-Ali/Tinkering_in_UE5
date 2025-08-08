@@ -62,6 +62,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Montages")
 	UAnimMontage* AttackMontage; //attack montage to be played when the attack button is pressed.
 
+	UPROPERTY(EditAnywhere, Category = "Montages")
+	UAnimMontage* EquipMontage;
+
 public:
 	//getters and setter should be sperated like this for good practice.
 	FORCEINLINE void SetOverlappingItem(AItems* Item) { OverlappingItem = Item; }

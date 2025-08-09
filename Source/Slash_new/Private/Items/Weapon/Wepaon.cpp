@@ -7,9 +7,14 @@
 //this function attatches the weapon to the character, is called in the character class
 void AWepaon::Equip(USceneComponent* InParent, FName InSocketName)
 {
+	AttachMeshToSocket(InParent, InSocketName);
+	ItemState = EItemState::EIS_Equipped;
+}
+
+void AWepaon::AttachMeshToSocket(USceneComponent* InParent, const FName& InSocketName)
+{
 	FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
 	ItemMesh->AttachToComponent(InParent, TransformRules, InSocketName);
-	ItemState = EItemState::EIS_Equipped;
 }
 
 void AWepaon::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

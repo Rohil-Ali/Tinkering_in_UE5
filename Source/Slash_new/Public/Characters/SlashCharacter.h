@@ -75,4 +75,8 @@ public:
 	FORCEINLINE void SetOverlappingItem(AItems* Item) { OverlappingItem = Item; }
 	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; }
 
+	UFUNCTION(BlueprintCallable)
+	void Disarm();
+	UFUNCTION(BlueprintCallable)
+	void Arm();
 };
